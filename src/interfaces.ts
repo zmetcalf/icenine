@@ -1,5 +1,5 @@
 interface GithubRepo {
-  account: string,
+  owner: string,
   repo: string,
 }
 
