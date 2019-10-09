@@ -31,10 +31,10 @@ export const getByUrl = async (gitUrl: string, page: number = 1) => {
 };
 
 export const getByCurrentDir = async (page: number = 1) => {
-  const service = new GithubService(
-    await getUrlFromFS(),
-    page
-  );
+  const gitUrl = await getUrlFromFS();
+  validateUrl(gitUrl);
+
+  const service = new GithubService(gitUrl, page);
   return await service.getData();
 };
 
