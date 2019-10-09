@@ -1,20 +1,23 @@
 import program from 'commander';
-import ErrorService from './services/ErrorService';
-import Facade from './Facade';
-import LogService from "./services/LogService";
+import { handleAppError } from './services/ErrorService';
+import { getByCurrentDir, getByUrl } from './Facade';
+import { logPRs } from "./services/LogService";
 
 program
   .version('1.0.0')
   .option('-u, --url <path>', 'Repository Url to view pull requests')
-  .action(async (cmd, options) => {
+  .option('-e', 'Show stack trace for errors')
+  .option('-p, --page <page>', 'Which page to show: default 1. Shows 30 at a time.')
+  .action(async cmd => {
     try {
-      if(options.url) {
-        LogService.logPRs(await Facade.getByUrl(options.url));
+      if(cmd.url) {
+        return logPRs(await getByUrl(cmd.url, cmd.page));
       }
 
-      LogService.logPRs(await Facade.getByCurrentDir(process.cwd()));
+      logPRs(await getByCurrentDir(process.cwd(), cmd.page));
+      process.exit(0);
     } catch (e) {
-      return ErrorService.handleAppError(e);
+      return handleAppError(e, typeof cmd.e  === 'undefined');
     }
   });
 

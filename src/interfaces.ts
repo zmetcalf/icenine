@@ -5,9 +5,23 @@ interface GithubRepo {
 
 interface PullRequestDetail {
   title: string,
-  commitCount: number,
-  commentCount: number,
+  commits: number,
+  comments: number,
   user: string,
 }
 
+interface GithubPullRequest {
+  url: string,
+  title: string,
+  user: {
+    login: string,
+  },
+  comments: number,
+  commits: number,
+}
 
+interface UntypeObject {}
+
+interface User {
+  name: string
+}

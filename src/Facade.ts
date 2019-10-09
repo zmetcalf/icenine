@@ -1,31 +1,40 @@
 import url from 'url';
 
 import GithubService from './services/GithubService';
+import RepoService from './services/RepoService';
+import UrlError from './errors/UrlError';
 
-const validateUrl = (gitUrl: string): void => {
+export const validateUrl = (gitUrl: string): void => {
   try {
     const result  = url.parse(gitUrl);
-    if(result.hostname !== 'github.com') {
-      // Throw error
-    }
+    if(result.hostname !== 'github.com') throw new UrlError(
+      'This is not a github url'
+    );
+
+    if(!result.path || result.path.split('/').length !== 3) throw new UrlError(
+      'Additional or missing owner and repo fields in Url. Do not include trailing slash'
+    )
   } catch (e) {
-    if(e instanceof TypeError) {
-
-    }
     if(e instanceof URIError) {
-
+      throw new UrlError('Invalid URL')
     }
-    // Throw Generic
+
+    // Bubble error
+    throw e;
   }
 };
 
-export const getByUrl = async (gitUrl: string) => {
+export const getByUrl = async (gitUrl: string, page: number = 1) => {
   validateUrl(gitUrl);
-  const service = new GithubService(gitUrl);
-
+  const service = new GithubService(gitUrl, page);
+  return await service.getData();
 };
 
-export const getByCurrentDir = async (path: string) => {
-
+export const getByCurrentDir = async (path: string, page: number = 1) => {
+  const service = new GithubService(
+    await (new RepoService(path)).getUrlFromFS(),
+    page
+  );
+  return await service.getData();
 };
 

@@ -1,8 +1,8 @@
 import nodegit from 'nodegit';
 
-class RepoService {
-  constructor(repoPath: string) {
-
+export default class RepoService {
+  constructor(private repoPath: string) {
+    console.log(this.repoPath);
   }
 
   async getUrlFromFS() {
