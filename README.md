@@ -1,4 +1,4 @@
-# icenine
+# ice_nine
 
 ## Hotel Engine Code Test
 
@@ -18,11 +18,11 @@ This utility may be used as directly or added added to path to be used in other 
 
 Directly
 
-`./icenine -u https://github.com/facebook/react`
+`./ice_nine -u https://github.com/facebook/react`
 
 In the root directory of a git repo (directory containing .git)
 
-`{{ location of this installed app }}/icenine/icenine`
+`{{ location of this installed app }}/ice_nine/ice_nine`
 
 Root of this directory can also be added to path.
 
