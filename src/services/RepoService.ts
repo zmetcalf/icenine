@@ -12,4 +12,3 @@ export const getUrlFromFS = async (): Promise<string> => {
         throw new InvalidRepoError('This is not a valid git repo');
     }
 };
-
