@@ -22,7 +22,9 @@ Directly
 
 In the root directory of a git repo (directory containing .git)
 
-`~/repos/icenine`
+`{{ location of this installed app }}/icenine/icenine`
+
+Root of this directory can also be added to path.
 
 ### Flags
 
