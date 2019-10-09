@@ -14,7 +14,7 @@ program
         return logPRs(await getByUrl(cmd.url, cmd.page));
       }
 
-      logPRs(await getByCurrentDir(process.cwd(), cmd.page));
+      logPRs(await getByCurrentDir(cmd.page));
       process.exit(0);
     } catch (e) {
       return handleAppError(e, typeof cmd.e  === 'undefined');

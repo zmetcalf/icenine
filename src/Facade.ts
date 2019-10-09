@@ -1,7 +1,7 @@
 import url from 'url';
 
 import GithubService from './services/GithubService';
-import RepoService from './services/RepoService';
+import { getUrlFromFS } from './services/RepoService';
 import UrlError from './errors/UrlError';
 
 export const validateUrl = (gitUrl: string): void => {
@@ -30,9 +30,9 @@ export const getByUrl = async (gitUrl: string, page: number = 1) => {
   return await service.getData();
 };
 
-export const getByCurrentDir = async (path: string, page: number = 1) => {
+export const getByCurrentDir = async (page: number = 1) => {
   const service = new GithubService(
-    await (new RepoService(path)).getUrlFromFS(),
+    await getUrlFromFS(),
     page
   );
   return await service.getData();

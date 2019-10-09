@@ -5,7 +5,8 @@
   "scripts": {
     "watch": "./node_modules/.bin/tsc --watch",
     "compile": "./node_modules/.bin/tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/jest",
+    "postinstall": "npm run compile"
   },
   "repository": {
     "type": "git",
